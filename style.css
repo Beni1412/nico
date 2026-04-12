@@ -1,0 +1,226 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic);
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #252432;
+}
+
+#cake {
+  display: block;
+  position: relative;
+  margin: -10em auto 0 auto;
+}
+
+.candle {
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  top: 228px;
+  left: 50%;
+  margin-left: -2.4px;
+  margin-top: -8.33333333px;
+  width: 5px;
+  height: 35px;
+  transform: translateY(-300px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-animation: in 500ms 6s ease-out forwards;
+  animation: in 500ms 6s ease-out forwards;
+}
+
+.candle:after,
+.candle:before {
+  background: rgba(255, 0, 0, 0.4);
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2.22222222px;
+}
+
+.candle:after {
+  top: 25%;
+  left: 0;
+}
+
+.candle:before {
+  top: 45%;
+  left: 0;
+}
+
+.fire {
+  border-radius: 100%;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -2.6px;
+  width: 6.66666667px;
+  height: 18px;
+}
+
+.fire:nth-child(1) {
+  -webkit-animation: fire 2s 6.5s infinite;
+  animation: fire 2s 6.5s infinite;
+}
+
+.fire:nth-child(2) {
+  -webkit-animation: fire 1.5s 6.5s infinite;
+  animation: fire 1.5s 6.5s infinite;
+}
+
+.fire:nth-child(3) {
+  -webkit-animation: fire 1s 6.5s infinite;
+  animation: fire 1s 6.5s infinite;
+}
+
+.fire:nth-child(4) {
+  -webkit-animation: fire 0.5s 6.5s infinite;
+  animation: fire 0.5s 6.5s infinite;
+}
+
+.fire:nth-child(5) {
+  -webkit-animation: fire 0.2s 6.5s infinite;
+  animation: fire 0.2s 6.5s infinite;
+}
+
+/* =========================================
+   TAMBAHAN UNTUK TOMBOL DAN POP-UP FOTO
+   ========================================= */
+
+/* Gaya untuk tombol */
+#btnFoto {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #a88679; /* Warna senada dengan kue */
+  color: #fefae9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#btnFoto:hover {
+  background-color: #8b6a60;
+}
+
+/* Gaya untuk Pop-up / Modal */
+.modal {
+  display: none; /* Sembunyikan default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Background gelap transparan */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Kontainer foto */
+.modal-content {
+  background-color: #fefae9;
+  padding: 15px;
+  border-radius: 12px;
+  position: relative;
+  text-align: center;
+  max-width: 80%;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+  display: block; /* Menghindari spasi aneh di bawah gambar */
+}
+
+/* Tombol X untuk tutup pop-up */
+.close-btn {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  color: #a88679;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #8b6a60;
+}
+
+/* Animasi pop-up muncul */
+@-webkit-keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fire {
+  0%,
+  100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+@keyframes fire {
+  0%,
+  100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+@-webkit-keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+.text {
+  color: #d1d1d1;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+}
+.text h1 {
+  font-size: 1.4em;
+}
