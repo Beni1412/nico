@@ -189,9 +189,37 @@
         transform: scale(0.97);
       }
 
-      /* After animation ends, enable pointer events */
       #btnFoto.active {
         pointer-events: auto;
+      }
+
+      /* Music toggle button */
+      #btnMusic {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 999;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(168, 134, 121, 0.6);
+        background: rgba(30, 20, 40, 0.6);
+        color: #fefae9;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        transition:
+          background 0.3s,
+          transform 0.15s;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      #btnMusic:hover {
+        background: rgba(168, 134, 121, 0.35);
+        transform: scale(1.1);
       }
 
       /* Modal */
@@ -284,6 +312,12 @@
     </style>
   </head>
   <body>
+    <!-- Background music -->
+    <audio id="bgMusic" src="./bday.mp3" loop preload="auto"></audio>
+
+    <!-- Music toggle button (top-right) -->
+    <button id="btnMusic" title="Pause / Play music">🎵</button>
+
     <canvas id="stars-canvas"></canvas>
     <div id="cake-wrapper">
       <div class="candle">
@@ -496,6 +530,20 @@
       <p>Nico</p>
       <button id="btnFoto">✨ klik ini nik</button>
     </div>
+    <style>
+      .text h1 {
+        font-size: 70px;
+      }
+
+      .text p {
+        font-size: 40px;
+      }
+
+      .text button {
+        font-size: 30px;
+        padding: 15px 25px;
+      }
+    </style>
 
     <div id="popupFoto" class="modal">
       <div class="modal-content">
@@ -518,7 +566,6 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Create stars with varied sizes and twinkle speeds
         for (var i = 0; i < 120; i++) {
           stars.push({
             x: Math.random(),
@@ -546,7 +593,6 @@
             ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(' + s.color + ',' + alpha + ')';
             ctx.fill();
-            // glow for bigger stars
             if (s.r > 1.6) {
               ctx.beginPath();
               ctx.arc(s.x * W, s.y * H, s.r * 2.5, 0, Math.PI * 2);
@@ -587,6 +633,53 @@
             this.style.display = 'none';
           }
         });
+    </script>
+    <script>
+      // Auto-play music; fallback to play on first user interaction
+      var music = document.getElementById('bgMusic');
+      var btnMusic = document.getElementById('btnMusic');
+      var isPlaying = false;
+
+      function tryPlay() {
+        music.currentTime = 13;
+        music
+
+          .play()
+          .then(function () {
+            isPlaying = true;
+            btnMusic.textContent = '🎵';
+          })
+          .catch(function () {
+            // Autoplay blocked – will play on first click
+          });
+      }
+
+      tryPlay();
+
+      // If autoplay blocked, start on first interaction anywhere
+      function startOnInteraction() {
+        if (!isPlaying) {
+          tryPlay();
+        }
+        document.removeEventListener('click', startOnInteraction);
+        document.removeEventListener('touchstart', startOnInteraction);
+      }
+      document.addEventListener('click', startOnInteraction);
+      document.addEventListener('touchstart', startOnInteraction);
+
+      // Toggle pause/play
+      btnMusic.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (music.paused) {
+          music.play();
+          isPlaying = true;
+          btnMusic.textContent = '🎵';
+        } else {
+          music.pause();
+          isPlaying = false;
+          btnMusic.textContent = '🔇';
+        }
+      });
     </script>
   </body>
 </html>
